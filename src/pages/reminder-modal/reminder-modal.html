@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar text-center color="primary">
+    <ion-title>Set Reminder</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="closeModal()">Close</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <h4>Set reminder for {{location}}</h4>
+  <ion-item>
+    <ion-label>Title</ion-label>
+    <ion-input type="text" name="title" [(ngModel)]="title" required>
+    </ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Date</ion-label>
+    <ion-datetime displayFormat="DD/MM/YYYY" min="2017" max="2099" name="reminderDate" [(ngModel)]="reminderDate"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>Time</ion-label>
+    <ion-datetime displayFormat="hh:mm a" name="reminderTime" [(ngModel)]="reminderTime"></ion-datetime>
+  </ion-item>
+  <div margin text-center>
+    <button *ngIf="!isInUpdate" color="secondary" ion-button (click)="setReminder()">Set Reminder</button>
+    <button *ngIf="isInUpdate" color="secondary" ion-button (click)="setReminder()">Update Reminder</button>
+  </div>
+</ion-content>

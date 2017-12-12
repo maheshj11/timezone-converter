@@ -1,0 +1,46 @@
+page-calculate-time-difference {
+    .item-cover{
+        width: initial; 
+    }
+    ion-datetime {
+        display: inline-flex;
+        font-size: 22px;
+        text-align: -webkit-center;
+    }
+    .datetime-text {
+        border-bottom: 1px dashed;
+        width: 150px;
+        background: #fff8be;
+    }
+    .warningAlert{
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        color: #8a6d3b;
+        background-color: #fcf8e3;
+        border-color: #faebcc;
+    }
+    .today_a-tag{
+        font-size: 18px;
+        font-weight: 500;
+        padding-right: 5px;
+        color: #476a7b;
+    }
+    .result_p-tag{
+        margin-top: 10px;
+    }
+    .icons{
+        font-size: 25px;
+        color: #5691b1;
+    }
+    .toolbar-title-md{
+        display: flex;
+        margin-left: 55px;
+        padding: 0px;
+    }
+    .card-md h2{
+        margin: 4px 0;
+        font-weight: 500
+    }
+}

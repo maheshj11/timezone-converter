@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-navbar text-center color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Time Difference</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <div text-center class="dateTime_div">
+    <hr>
+    <h3>Start Date</h3>
+    <hr>
+    <div>
+      <ion-icon class="icons" name="calendar"></ion-icon>
+      <ion-datetime displayFormat="DD/MM/YYYY" min="1900" max="2099" [(ngModel)]="date1"></ion-datetime>
+      <div>
+        <a class="today_a-tag" (click)="setCurrentDate('date1')">Today</a>
+      </div>
+    </div>
+    <div>
+      <ion-icon class="icons" name="time"></ion-icon>
+      <ion-datetime displayFormat="hh:mm:ss a" name="time1" [(ngModel)]="time1"></ion-datetime>
+      <div>
+        <a class="today_a-tag" (click)="setCurrentTime('time1')">Now |</a>
+        <a class="today_a-tag" (click)="setStartOfDayTime('time1')">Start-of-Day |</a>
+        <a class="today_a-tag" (click)="setNoonTime('time1')">Noon</a>
+      </div>
+    </div>
+  </div>
+  <div text-center class="dateTime_div">
+    <hr>
+    <h3>End Date</h3>
+    <hr>
+    <div>
+      <ion-icon class="icons" name="calendar"></ion-icon>
+      <ion-datetime displayFormat="DD/MM/YYYY" min="1900" max="2099" [(ngModel)]="date2"></ion-datetime>
+      <div>
+        <a class="today_a-tag" (click)="setCurrentDate('date2')">Today</a>
+      </div>
+    </div>
+    <div>
+      <ion-icon class="icons" name="time"></ion-icon>
+      <ion-datetime displayFormat="hh:mm:ss a" name="time2" [(ngModel)]="time2"></ion-datetime>
+      <div>
+        <a class="today_a-tag" (click)="setCurrentTime('time2')">Now |</a>
+        <a class="today_a-tag" (click)="setStartOfDayTime('time2')">Start-of-Day |</a>
+        <a class="today_a-tag" (click)="setNoonTime('time2')">Noon</a>
+      </div>
+    </div>
+  </div>
+  <div margin text-center>
+    <button color="secondary" ion-button (click)="calculateTime()">Calculate</button>
+  </div>
+  <div class="warningAlert" *ngIf="isAfter" margin>
+    <strong>Warning!</strong> The Start date was after the End date, so the Start and End fields were swapped</div>
+
+  <ion-card *ngIf="showResultCards">
+    <ion-card-content>
+      <h2>
+        <strong>Result :
+          <span *ngIf="days !== 0">{{days}},</span> {{hours}}, {{minutes}} and {{seconds}}</strong>
+      </h2>
+      <p class="result_p-tag">
+        <strong>Or,</strong>
+        <span *ngIf="yyear !== 0">{{yyear}},</span>
+        <span *ngIf="months !== 0"> {{months}}, </span>
+        <span *ngIf="dday !== 0">{{dday}},</span> {{hours}}, {{minutes}} and {{seconds}}</p>
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="showResultCards && !hideAltUnits">
+    <ion-card-content>
+      <strong>
+        <h2>Alternative time units :</h2>
+      </strong>
+      <p>
+        <span *ngIf="days !== 0">{{days}},</span> {{hours}}, {{minutes}} and {{seconds}} can be converted to one of these units:</p>
+      <ul>
+        <li *ngIf="inSeconds">
+          {{inSeconds}} Seconds
+        </li>
+        <li *ngIf="inMinutes">
+          {{inMinutes}} Minutes
+        </li>
+        <li *ngIf="inHours">
+          {{inHours}} Hours (Rounded)
+        </li>
+        <li *ngIf="inDays">
+          {{inDays}} Days (Rounded)
+        </li>
+        <li *ngIf="inWeeks">
+          {{inWeeks}} Weeks (Rounded)
+        </li>
+        <li *ngIf="inYears">
+          {{inYears}} % of a Year
+        </li>
+      </ul>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

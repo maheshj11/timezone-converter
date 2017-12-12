@@ -1,14 +1,62 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+
+  <ion-navbar text-center color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Time Converter</ion-title>
   </ion-navbar>
 </ion-header>
 
+
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <h4 class="time_converter-h2">
+    <div class="favourite-icon">
+      <ion-icon (click)="addToFavourites()" color="fav" name="heart"></ion-icon>
+    </div>
+    If the time in
+    <span class="span-city" (click)="openModal1()">{{city1}}</span> is
+    <ion-item class="ion_item-timepicker">
+      <ion-datetime displayFormat="hh:mm a" name="time1" [(ngModel)]="time1" (ionChange)="getTime2()"></ion-datetime>
+    </ion-item>
+    it will be
+    <ion-item class="ion_item-timepicker">
+      <ion-datetime displayFormat="hh:mm a" name="time2" [(ngModel)]="time2" (ionChange)="getTime1()"></ion-datetime>
+    </ion-item>
+    <span class="difference_text-span" *ngIf="dateIsDifferent">({{dateDifferenceIs}})</span>
+    in
+    <span class="span-city" (click)="openModal2()">{{city2}}</span>
+  </h4>
+  <div *ngIf="!sameTimezone" text-center>
+    <p>{{city1}} is {{hrs}} hours and {{mins}} minutes {{checkDifference}} {{city2}}</p>
+  </div>
+  <div *ngIf="sameTimezone" text-center>
+    <p>There is no time difference between {{city1}} and {{city2}}</p>
+  </div>
+  <ion-list>
+    <div text-center class="savedTimeZones-favourites_header">
+      <h1>Favourites</h1>
+    </div>
+    <ion-item class="savedTimeZones-ion_item" *ngFor="let favourite of favouritesData; let i = index" text-wrap>
+      <ion-card class="savedTimeZones-ion_card">
+        <div class="savedTimeZones-span">
+          <ion-icon name="trash" (click)="deleteItem(i)"></ion-icon>
+        </div>
+        <ion-card-content (click)="setTime(i)">
+          <h4 class="list-h4">If the time in
+            <span class="favourite_item-span">{{favourite.city1}}</span> is
+            <span class="favourite_item-span">{{favourite.time1}}</span> it will be
+            <span class="favourite_item-span">{{favourite.time2}}</span> in
+            <span class="favourite_item-span">{{favourite.city2}}</span>
+          </h4>
+          <hr>
+          <div text-center>
+            <a (click)="addToReminders()"><ion-icon name="alarm"></ion-icon>
+              Set a reminder</a>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+  <div text-center *ngIf="listEmpty">You have not saved any favourites yet.</div>
 </ion-content>

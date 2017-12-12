@@ -1,0 +1,22 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Reminders</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let reminder of reminders" (click)="openActionSheet(reminder)">
+      <h2>{{reminder.reminderTitle}}</h2>
+      <p>{{reminder.dataTimeFormated}} ({{reminder.dataLocation || reminder.dataUtc}} time)</p>
+      <p class="localTime">{{reminder.reminderTime}} (local time)</p>
+    </ion-item>
+  </ion-list>
+  <div text-center *ngIf="noReminders">Your reminders list is empty</div>
+</ion-content>

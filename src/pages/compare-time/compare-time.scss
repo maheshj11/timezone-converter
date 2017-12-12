@@ -1,0 +1,92 @@
+page-compare-time {
+    .horizontal_time-row{
+        div{
+            padding: 15px 10px;
+            width: 60px;
+            height:65px;
+            text-align: center;
+            border-right: 1px solid #bfbfbf;
+            border-bottom: 1px solid #bfbfbf;
+        }
+        div:last-child {
+            border-right: none;
+        }
+    }
+    ion-scroll {
+        height: -webkit-fill-available;
+    }
+    .scroll-zoom-wrapper{
+        width: fit-content;
+    }
+    .time-item{
+        position: relative;
+        height:65px;
+        text-align: center;
+        border-bottom: 1px solid #5f7c8c;
+    }
+    .city-div{
+        margin: auto 0px;
+        position: relative;
+        padding-left: 15px;
+        width: 84px;
+    }
+    [col-3] {
+        padding: 0px !important;
+        background: #e3e3e8;
+    }
+    [col-9] {
+        padding: 0px !important;
+        background: #e3e3e8;
+    }
+    .selectedHomeIcon{
+        position: absolute;
+        color: #607D8B;
+        top: 23px;
+        padding-left: 3px;
+    }
+    .setAm{
+        background-color: #c1d5e0;
+    }
+    .setPm{
+        background-color: #90a4ae;
+    }
+    .setDate{
+        background-color: #f1f7fb;
+        font-weight: bold;
+    }
+    .grid{
+        padding: 0px !important;
+    }
+    .timeLine{
+        position: absolute;
+        border-left: 1px solid;
+        top: 0px;
+        color: #008000;
+        z-index: 9;
+        &:before {
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid;
+            content: "";
+            position: absolute;
+            left: -11px;
+        }
+    }
+    .scroll-zoom-wrapper {
+        position: relative;
+    }
+    .toolbar-title-md {
+        display: flex;
+        margin-left: 55px;
+    }
+    .times{
+        position: absolute;
+        background: #60a760;
+        padding: 0px 5px;
+        border-radius: 5px;
+        z-index: 10;
+        font-size: smaller;
+    }
+}

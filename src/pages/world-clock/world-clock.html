@@ -1,0 +1,32 @@
+<ion-header>
+
+  <ion-navbar text-center color="primary">
+    <ion-title>World-clock</ion-title>
+    <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addNewTimezone()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item class="worldClock_ion-item" *ngFor="let clock of worldClocks; let i=index">
+      <div class="city-div">{{clock.city}}</div>
+      <div class="time-div">
+        <p>{{clock.date}}</p>
+        <h2>{{clock.time}}</h2>
+      </div>
+      <div class="worldClock-div">
+        <ion-icon name="close" color="fav" (click)="deleteItem(i)"></ion-icon>
+      </div>
+    </ion-item>
+  </ion-list>
+  <div text-center *ngIf="listEmpty">Please select a location to see the time</div>
+</ion-content>

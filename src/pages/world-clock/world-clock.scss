@@ -1,0 +1,32 @@
+page-world-clock {
+    .worldClock_ion-item{
+        font-family: Aldrich;
+        position: relative;
+        padding: 0px !important;
+    }
+    .label-md {
+        margin: 13px 8px 13px 10px;
+    }
+    .toolbar-title-md{
+        display: flex;
+        margin-left: 55px;
+    }
+    .time-div{
+        //float: right;
+        padding: 10px 10px 10px 0px;
+        p{
+            display: inline;
+        }
+        h2{
+            font-size: 20px;
+            float: right;
+            line-height: 1rem;
+        }
+    }
+    .worldClock-div{
+        position: absolute;
+        right: 10px;
+        top: 5px;
+        font-size: 18px;
+    }
+}
