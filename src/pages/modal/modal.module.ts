@@ -3,9 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { ModalPage } from './modal';
 
 @NgModule({
-  declarations: [
-    ModalPage,
-  ],
+  declarations: [],
   imports: [
     IonicPageModule.forChild(ModalPage),
   ],

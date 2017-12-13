@@ -3,9 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { CompareTimePage } from './compare-time';
 
 @NgModule({
-  declarations: [
-    CompareTimePage,
-  ],
+  declarations: [],
   imports: [
     IonicPageModule.forChild(CompareTimePage),
   ],

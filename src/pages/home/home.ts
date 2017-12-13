@@ -1,3 +1,4 @@
+import { TabsPage } from './../tabs/tabs';
 // import { ReplacePipe } from '../../pipes/replace/replace';
 import { ReminderModalPage } from './../reminder-modal/reminder-modal';
 import { Component } from '@angular/core';
@@ -48,7 +49,7 @@ export class HomePage {
     this.calculateTimeDifference()
   }
   openModal1() {
-    let searchModal = this.modalCtrl.create(ModalPage);
+    let searchModal = this.modalCtrl.create(TabsPage);
     searchModal.present();
     searchModal.onDidDismiss(data => {
       if (typeof data !== "undefined") {
@@ -66,7 +67,7 @@ export class HomePage {
   }
 
   openModal2() {
-    let searchModal = this.modalCtrl.create(ModalPage);
+    let searchModal = this.modalCtrl.create(TabsPage);
     searchModal.present();
     searchModal.onDidDismiss(data => {
       if (typeof data !== "undefined") {

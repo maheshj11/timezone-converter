@@ -1,0 +1,14 @@
+
+<ion-header>
+  <ion-navbar text-center color="primary">
+    <ion-title>Select Location</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="closeModal()">Close</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ng4geo-autocomplete (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
+</ion-content>

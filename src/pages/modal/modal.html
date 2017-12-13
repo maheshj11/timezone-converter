@@ -10,10 +10,10 @@
 
 
 <ion-content padding>
-  <ion-searchbar
-  [(ngModel)]="searchQuery"
-  (ionInput)="onInput($event)">
-</ion-searchbar>
+    <ion-searchbar
+    [(ngModel)]="searchQuery"
+    (ionInput)="onInput($event)">
+  </ion-searchbar>
 <ion-list *ngIf="filterSearch">
   <ion-item *ngFor="let timezone of filterListArray" (click)="selectedTimezone(timezone)">
     <h3>{{ timezone.location }}</h3>
@@ -21,6 +21,7 @@
     <p>{{ timezone.abbr }}</p>
   </ion-item>
 </ion-list>
+
 <ion-list *ngIf="!filterSearch">
   <ion-item *ngFor="let timezone of timezones" (click)="selectedTimezone(timezone)">
     <h3>{{ timezone.location }}</h3>

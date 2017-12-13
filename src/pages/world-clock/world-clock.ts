@@ -1,3 +1,4 @@
+import { TabsPage } from './../tabs/tabs';
 import { Component } from '@angular/core';
 import { AlertController, IonicPage, ModalController, ToastController } from 'ionic-angular';
 import { ModalPage } from '../modal/modal';
@@ -24,7 +25,7 @@ export class WorldClockPage {
   }
 
   addNewTimezone() {
-    let searchModal = this.modalCtrl.create(ModalPage);
+    let searchModal = this.modalCtrl.create(TabsPage);
     searchModal.present();
     searchModal.onDidDismiss(data => {
       if (typeof data !== "undefined") {

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, ViewController } from 'ionic-angular';
-import { TIMEZONES } from './../../timezone_data/timezone.data'
+import { TIMEZONES } from './../../timezone_data/timezone.data';
+import { Events } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -17,13 +18,14 @@ export class ModalPage {
   count: number = 0;
   totalTimezones: number;
 
-  constructor(public viewCtrl: ViewController) {
+  constructor(public viewCtrl: ViewController, public events: Events) {
     this.initializeItems();
     this.initializeSearchItems()
   }
   closeModal() {
-    this.viewCtrl.dismiss();
+    this.events.publish('modal:closed');
   }
+
 
   initializeSearchItems() {
     this.filterListArray = TIMEZONES;
@@ -72,7 +74,8 @@ export class ModalPage {
   }
 
   selectedTimezone(timezone) {
-    this.viewCtrl.dismiss({ data: timezone });
+    this.events.publish('modal:closed',{ data: timezone });
+    //this.viewCtrl.dismiss({ data: timezone });
   }
   // checkUtc(utc,val) {
   // const filterUtc = utc.filter(element => element.toLowerCase().indexOf(val.toLowerCase()) > -1);

@@ -3,9 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { CalculateTimeDifferencePage } from './calculate-time-difference';
 
 @NgModule({
-  declarations: [
-    CalculateTimeDifferencePage,
-  ],
+  declarations: [],
   imports: [
     IonicPageModule.forChild(CalculateTimeDifferencePage),
   ],

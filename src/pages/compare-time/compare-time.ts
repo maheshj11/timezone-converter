@@ -1,3 +1,4 @@
+import { TabsPage } from './../tabs/tabs';
 import { Component, ViewChild } from '@angular/core';
 // import { ReplacePipe } from '../../pipes/replace/replace';
 import {
@@ -156,7 +157,7 @@ export class CompareTimePage {
   }
 
   addNewTimezone(i) {
-    let searchModal = this.modalCtrl.create(ModalPage);
+    let searchModal = this.modalCtrl.create(TabsPage);
     searchModal.present();
     searchModal.onDidDismiss(data => {
       if (typeof data !== "undefined") {

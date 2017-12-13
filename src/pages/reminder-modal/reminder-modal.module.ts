@@ -3,9 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { ReminderModalPage } from './reminder-modal';
 
 @NgModule({
-  declarations: [
-    ReminderModalPage,
-  ],
+  declarations: [],
   imports: [
     IonicPageModule.forChild(ReminderModalPage),
   ],

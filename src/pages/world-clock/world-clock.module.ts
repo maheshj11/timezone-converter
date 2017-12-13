@@ -3,9 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { WorldClockPage } from './world-clock';
 
 @NgModule({
-  declarations: [
-    WorldClockPage,
-  ],
+  declarations: [],
   imports: [
     IonicPageModule.forChild(WorldClockPage),
   ],
