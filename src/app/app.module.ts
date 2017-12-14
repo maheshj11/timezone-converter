@@ -14,7 +14,7 @@ import { CompareTimePage } from '../pages/compare-time/compare-time';
 import { CalculateTimeDifferencePage } from './../pages/calculate-time-difference/calculate-time-difference';
 import { ReminderModalPage } from '../pages/reminder-modal/reminder-modal';
 import { LocalNotifications } from '@ionic-native/local-notifications';
-import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
+import { AdMobFree } from '@ionic-native/admob-free';
 import { Ng4GeoautocompleteModule } from 'ng4-geoautocomplete';
 import { TabsPage } from '../pages/tabs/tabs';
 import { GoogleSearchPage } from './../pages/google-search/google-search';

@@ -16,14 +16,14 @@
 
 
 <ion-content>
-  <ion-list>
+  <ion-list reorder="true" side="start"  (ionItemReorder)="reorderItems($event)">
     <ion-item class="worldClock_ion-item" *ngFor="let clock of worldClocks; let i=index">
       <div class="city-div">{{clock.city}}</div>
       <div class="time-div">
         <p>{{clock.date}}</p>
         <h2>{{clock.time}}</h2>
       </div>
-      <div class="worldClock-div">
+      <div item-end class="worldClock-div">
         <ion-icon name="close" color="fav" (click)="deleteItem(i)"></ion-icon>
       </div>
     </ion-item>

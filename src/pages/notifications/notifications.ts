@@ -23,7 +23,6 @@ export class NotificationsPage {
   }
 
   getAllReminders() {
-    debugger
     this.reminders = [];
     if (this.platform.is('cordova')) {
       this.localNotifications.getAll().then((data) => {

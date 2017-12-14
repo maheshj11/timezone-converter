@@ -17,8 +17,8 @@ export class TabsPage {
     public navParams: NavParams,
     public events: Events,
     public viewCtrl: ViewController) {
-    this.tab1Root = ModalPage
-    this.tab2Root = GoogleSearchPage;
+    this.tab1Root = GoogleSearchPage
+    this.tab2Root = ModalPage;
 
     events.subscribe('modal:closed', (data) => { 
       this.viewCtrl.dismiss(data);

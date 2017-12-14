@@ -1,6 +1,5 @@
 import { TabsPage } from './../tabs/tabs';
 import { Component, ViewChild } from '@angular/core';
-// import { ReplacePipe } from '../../pipes/replace/replace';
 import {
   ActionSheetController,
   AlertController,
@@ -10,7 +9,6 @@ import {
   NavParams,
   ToastController
 } from 'ionic-angular';
-import { ModalPage } from '../modal/modal';
 import { ReminderModalPage } from './../reminder-modal/reminder-modal';
 import * as momenttz from 'moment-timezone';
 import * as moment from 'moment';
@@ -46,7 +44,6 @@ export class CompareTimePage {
     private actionCtrl: ActionSheetController) {
     this.displayTime();
     this.getHeight();
-    // this.getCurrentTimeArray()
   }
 
   showCurrentTime() {
@@ -218,13 +215,6 @@ export class CompareTimePage {
       title: "Actions",
       buttons: [
         {
-          text: 'Delete',
-          role: 'destructive',
-          handler: () => {
-            this.deleteItem(i)
-          }
-        },
-        {
           text: 'Set as Home Timezone',
           handler: () => {
             this.markAsHome(list, i);
@@ -237,12 +227,78 @@ export class CompareTimePage {
           }
         },
         {
+          text: 'Move Up',
+          handler: () => {
+            this.moveUp(i)
+          }
+        },
+        {
+          text: 'Move Down',
+          handler: () => {
+            this.moveDown(i)
+          }
+        },
+        {
+          text: 'Delete',
+          role: 'destructive',
+          handler: () => {
+            this.deleteItem(i)
+          }
+        },
+        {
           text: 'Cancel',
           role: 'cancel'
         }
       ]
     })
     actionSheet.present();
+  }
+
+  moveUp(i) {
+    if (i !== 0) {
+      let element = this.timezoneList[i];
+      let moveTo = i - 1;
+      if (this.selectedHomeTimeZone === i) {
+        this.selectedHomeTimeZone = this.selectedHomeTimeZone - 1;
+        localStorage.setItem('selectedHomeTimeZone', this.selectedHomeTimeZone);
+      }
+      else if (this.selectedHomeTimeZone === moveTo) {
+        this.selectedHomeTimeZone = this.selectedHomeTimeZone + 1;
+        localStorage.setItem('selectedHomeTimeZone', this.selectedHomeTimeZone);
+      }
+      this.timezoneList.splice(i, 1);
+      this.timezoneList.splice(moveTo, 0, element);
+      let compareData = this.timezoneList;
+      compareData.map(data => {
+        delete data.times;
+      })
+      localStorage.setItem('compareTimeData', JSON.stringify(compareData));
+      this.displayTime();
+    }
+  }
+
+  moveDown(i) {
+    if (i !== this.timezoneList.length - 1) {
+      let element = this.timezoneList[i];
+      let moveTo = i + 1;
+      if (this.selectedHomeTimeZone === i) {
+        this.selectedHomeTimeZone = this.selectedHomeTimeZone + 1;
+        localStorage.setItem('selectedHomeTimeZone', this.selectedHomeTimeZone);
+      }
+      else if (this.selectedHomeTimeZone === moveTo) {
+        this.selectedHomeTimeZone = this.selectedHomeTimeZone - 1;
+        localStorage.setItem('selectedHomeTimeZone', this.selectedHomeTimeZone);
+      }
+      this.timezoneList.splice(i, 1);
+      this.timezoneList.splice(moveTo, 0, element);
+      console.log(this.timezoneList);
+      let compareData = this.timezoneList;
+      compareData.map(data => {
+        delete data.times;
+      })
+      localStorage.setItem('compareTimeData', JSON.stringify(compareData));
+      this.displayTime();
+    }
   }
 
   setReminderActionSheet(time, list, i) {
@@ -290,7 +346,7 @@ export class CompareTimePage {
   }
 
   deleteItem(i) {
-    let compareTimeData = JSON.parse(localStorage.getItem('compareTimeData')) || [];
+    //let compareTimeData = JSON.parse(localStorage.getItem('compareTimeData')) || [];
     if (this.selectedHomeTimeZone === i) {
       const alert = this.alertCtrl.create({
         title: "Delete Home Timezone",
@@ -305,8 +361,10 @@ export class CompareTimePage {
             text: 'YES',
             handler: () => {
               localStorage.removeItem('selectedHomeTimeZone');
-              compareTimeData.splice(i, 1);
-              localStorage.setItem('compareTimeData', JSON.stringify(compareTimeData));
+              // compareTimeData.splice(i, 1);
+              this.timezoneList.splice(i, 1)
+              localStorage.setItem('compareTimeData', JSON.stringify(this.timezoneList));
+              //localStorage.setItem('compareTimeData', JSON.stringify(compareTimeData));
               this.displayTime();
               this.getHeight()
             }
@@ -320,8 +378,8 @@ export class CompareTimePage {
         this.selectedHomeTimeZone = this.selectedHomeTimeZone - 1;
         localStorage.setItem('selectedHomeTimeZone', this.selectedHomeTimeZone);
       }
-      compareTimeData.splice(i, 1);
-      localStorage.setItem('compareTimeData', JSON.stringify(compareTimeData));
+      this.timezoneList.splice(i, 1)
+      localStorage.setItem('compareTimeData', JSON.stringify(this.timezoneList));
       this.displayTime();
       this.getHeight()
     }
@@ -340,13 +398,13 @@ export class CompareTimePage {
 
   getHeightToDisplayTime(i) {
     let hgt;
-    if(i === 0) {
+    if (i === 0) {
       return hgt = 50;
     }
-    else{
+    else {
       let addValue = i * 15;
       i++
-      return hgt = (i * 50)+ addValue;
+      return hgt = (i * 50) + addValue;
     }
   }
 }

@@ -37,6 +37,8 @@
           </div>
           <ion-row *ngFor="let list of timezoneList; let i = index" nowrap class="horizontal_time-row">
             <div *ngFor="let time of list.times" (click)="setReminderActionSheet(time,list,i)" [ngClass]="{'setAm': (time.amPm === 'am'), 'setPm': (time.amPm === 'pm'), 'setDate': time.date}">
+              <ion-icon class="sun-moon_icon" *ngIf="time.amPm === 'am'" name="sunny"></ion-icon>
+              <ion-icon class="sun-moon_icon" *ngIf="time.amPm === 'pm'"name="moon"></ion-icon>
               <span *ngIf="time.date">{{time.date}}</span>
               {{time.plainTime}} {{time.amPm}}
             </div>

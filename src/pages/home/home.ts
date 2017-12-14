@@ -56,11 +56,15 @@ export class HomePage {
         this.city1 = data.data.location;
         if (typeof data.data.utc !== "undefined") {
           this.time1utc = data.data.utc;
-          this.getTime1();
+          setTimeout(() => {
+            this.getTime1();
+          },500)
         }
         else {
           this.time1utc = data.data.location;
-          this.getTime1();
+          setTimeout(() => {
+            this.getTime1();
+          },500)
         }
       }
     });
@@ -74,11 +78,15 @@ export class HomePage {
         this.city2 = data.data.location;
         if (typeof data.data.utc !== "undefined") {
           this.time2utc = data.data.utc;
-          this.getTime2()
+          setTimeout(() => {
+            this.getTime2();
+          },500)
         }
         else {
           this.time2utc = data.data.location;
-          this.getTime2()
+          setTimeout(() => {
+            this.getTime2();
+          },500)
         }
       }
     });

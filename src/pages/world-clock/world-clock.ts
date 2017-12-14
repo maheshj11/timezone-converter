@@ -24,6 +24,15 @@ export class WorldClockPage {
     this.showsavedWorldClocks();
   }
 
+  reorderItems(indexes) {
+    let element = this.worldClocks[indexes.from];
+    this.worldClocks.splice(indexes.from, 1);
+    this.worldClocks.splice(indexes.to, 0, element);
+    console.log(this.worldClocks);
+    localStorage.setItem('savedWorldClocks', JSON.stringify(this.worldClocks));
+    this.showsavedWorldClocks();
+  }
+
   addNewTimezone() {
     let searchModal = this.modalCtrl.create(TabsPage);
     searchModal.present();
@@ -118,10 +127,11 @@ export class WorldClockPage {
         {
           text: 'YES',
           handler: () => {
-            let savedWorldClocks = JSON.parse(localStorage.getItem('savedWorldClocks')) || [];
-            savedWorldClocks.splice(i, 1);
-            localStorage.setItem('savedWorldClocks', JSON.stringify(savedWorldClocks));
-            if (savedWorldClocks.length === 0) {
+            // let savedWorldClocks = JSON.parse(localStorage.getItem('savedWorldClocks')) || [];
+            // savedWorldClocks.splice(i, 1);
+            this.worldClocks.splice(i,1)
+            localStorage.setItem('savedWorldClocks', JSON.stringify(this.worldClocks));
+            if (this.worldClocks.length === 0) {
               this.listEmpty = true;
             }
             this.showsavedWorldClocks()

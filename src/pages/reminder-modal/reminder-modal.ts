@@ -68,7 +68,9 @@ export class ReminderModalPage {
         id: this.reminderId || new Date().valueOf(),
         title: this.title,
         at: new Date(timeZoneReminderTime),
-        data: { time: newTime, location: this.location, utc: this.reminderTimeZoneUtc || this.location }
+        data: { time: newTime, location: this.location, utc: this.reminderTimeZoneUtc || this.location },
+        icon: "res://mipmap-hdpi/icon.png",
+        smallIcon: "res://mipmap-idpi/icon.png"
       });
       this.viewCtrl.dismiss();
       const toast = this.toastCtrl.create({
