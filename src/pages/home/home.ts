@@ -2,10 +2,12 @@ import { TabsPage } from './../tabs/tabs';
 // import { ReplacePipe } from '../../pipes/replace/replace';
 import { ReminderModalPage } from './../reminder-modal/reminder-modal';
 import { Component } from '@angular/core';
-import { AlertController, IonicPage, ModalController, NavController, NavParams, ToastController } from 'ionic-angular';
+import { AlertController, IonicPage, ModalController, NavController, NavParams, ToastController, ActionSheetController } from 'ionic-angular';
 import { ModalPage } from '../modal/modal';
 import * as momenttz from 'moment-timezone';
 import * as moment from 'moment';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { Screenshot } from '@ionic-native/screenshot';
 
 @IonicPage()
 @Component({
@@ -31,11 +33,10 @@ export class HomePage {
   dateDifferenceIs: any;
   sameTimezone: boolean = false;
 
-  constructor(public navCtrl: NavController,
-    public navParams: NavParams,
-    public modalCtrl: ModalController,
-    private alertCtrl: AlertController,
-    private toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    public modalCtrl: ModalController, private alertCtrl: AlertController,
+    private toastCtrl: ToastController, private socialSharing: SocialSharing,
+    private actionCtrl: ActionSheetController, private screenshot: Screenshot) {
   }
 
   ionViewDidLoad() {
@@ -58,13 +59,13 @@ export class HomePage {
           this.time1utc = data.data.utc;
           setTimeout(() => {
             this.getTime1();
-          },500)
+          }, 500)
         }
         else {
           this.time1utc = data.data.location;
           setTimeout(() => {
             this.getTime1();
-          },500)
+          }, 500)
         }
       }
     });
@@ -80,13 +81,13 @@ export class HomePage {
           this.time2utc = data.data.utc;
           setTimeout(() => {
             this.getTime2();
-          },500)
+          }, 500)
         }
         else {
           this.time2utc = data.data.location;
           setTimeout(() => {
             this.getTime2();
-          },500)
+          }, 500)
         }
       }
     });
@@ -238,7 +239,7 @@ export class HomePage {
   addToReminders() {
     const alert = this.alertCtrl.create({
       title: "Set Reminder",
-      message: "Set reminder for timezone to which you compared",
+      message: "Set reminder for timezone you compared",
       buttons: [
         {
           text: 'No',
@@ -261,6 +262,75 @@ export class HomePage {
     });
     alert.present();
   }
+
+  shareFavourite(favourite) {
+    debugger
+    const actionSheet = this.actionCtrl.create({
+      title: "Actions",
+      buttons: [
+        {
+          text: 'Share a screenshot',
+          handler: () => {
+            setTimeout(() => {
+              this.shareScreen(favourite);
+            }, 200);
+          }
+        },
+        {
+          text: 'Share as plain text',
+          handler: () => {
+            setTimeout(() => {
+              this.shareText(favourite)
+            }, 200);
+          }
+        }
+      ]
+    })
+    actionSheet.present();
+  }
+  shareText(favourite) {
+    let city1, city2, time1, time2;
+      if (typeof favourite == "undefined") {
+        city1 = this.city1;
+        city2 = this.city2;
+        time1 = momenttz.tz(this.time1, this.time1utc).format('h:mm a');
+        time2 = momenttz.tz(this.time2, this.time2utc).format('h:mm a');
+      } else {
+        city1 = favourite.city1;
+        city2 = favourite.city2;
+        time1 = favourite.time1;
+        time2 = favourite.time2;
+      }
+      this.socialSharing.share(`If the time in ${city1} is ${time1} it will be ${time2} in ${city2} "- https://goo.gl/tEUF7X"`, null, null, null).then(() => {
+      console.log("success");
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
+  shareScreen(favourite) {
+    this.screenshot.URI(50).then((res) => {
+      let city1, city2, time1, time2;
+      if (typeof favourite == "undefined") {
+        city1 = this.city1;
+        city2 = this.city2;
+        time1 = momenttz.tz(this.time1, this.time1utc).format('h:mm a');
+        time2 = momenttz.tz(this.time2, this.time2utc).format('h:mm a');
+      } else {
+        city1 = favourite.city1;
+        city2 = favourite.city2;
+        time1 = favourite.time1;
+        time2 = favourite.time2;
+      }
+      this.socialSharing.share(`If the time in ${city1} is ${time1} it will be ${time2} in ${city2} "- https://goo.gl/tEUF7X"`, null, res.URI, null).then(() => {
+        console.log("success");
+      }).catch((err) => {
+        console.log(err);
+      });
+    }, onError => {
+      console.log(onerror);
+    })
+  }
+
 
   deleteItem(i) {
     const alert = this.alertCtrl.create({

@@ -20,6 +20,12 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { GoogleSearchPage } from './../pages/google-search/google-search';
 import { TimeApiProvider } from '../providers/time-api/time-api';
 import { HttpClientModule } from '@angular/common/http';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { Screenshot } from '@ionic-native/screenshot';
+import { AppRate } from '@ionic-native/app-rate';
+import { AndroidFullScreen } from '@ionic-native/android-full-screen';
+import { Brightness } from '@ionic-native/brightness';
+import { LaunchReview } from '@ionic-native/launch-review';
 
 @NgModule({
   declarations: [
@@ -60,7 +66,13 @@ import { HttpClientModule } from '@angular/common/http';
     LocalNotifications,
     AdMobFree,
     TimeApiProvider,
-    TimeApiProvider
+    TimeApiProvider,
+    SocialSharing,
+    Screenshot,
+    AppRate,
+    AndroidFullScreen,
+    Brightness,
+    LaunchReview
   ]
 })
 export class AppModule {}

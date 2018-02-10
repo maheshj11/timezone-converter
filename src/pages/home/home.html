@@ -14,7 +14,10 @@
     <div class="favourite-icon">
       <ion-icon (click)="addToFavourites()" color="fav" name="heart"></ion-icon>
     </div>
-    If the time in
+    <div class="share-icon">
+      <ion-icon (click)="shareFavourite()" color="primary" name="share"></ion-icon>
+    </div>
+    If the time <br> in
     <span class="span-city" (click)="openModal1()">{{city1}}</span> is
     <ion-item class="ion_item-timepicker">
       <ion-datetime displayFormat="hh:mm a" name="time1" [(ngModel)]="time1" (ionChange)="getTime2()"></ion-datetime>
@@ -39,9 +42,9 @@
     </div>
     <ion-item class="savedTimeZones-ion_item" *ngFor="let favourite of favouritesData; let i = index" text-wrap>
       <ion-card class="savedTimeZones-ion_card">
-        <div class="savedTimeZones-span">
+        <!-- <div class="savedTimeZones-span">
           <ion-icon name="trash" (click)="deleteItem(i)"></ion-icon>
-        </div>
+        </div> -->
         <ion-card-content (click)="setTime(i)">
           <h4 class="list-h4">If the time in
             <span class="favourite_item-span">{{favourite.city1}}</span> is
@@ -50,10 +53,22 @@
             <span class="favourite_item-span">{{favourite.city2}}</span>
           </h4>
           <hr>
-          <div text-center>
+          <!-- <div text-center>
             <a (click)="addToReminders()"><ion-icon name="alarm"></ion-icon>
               Set a reminder</a>
-          </div>
+          </div> -->
+          <ion-row>
+            <ion-col col-3 text-center>
+              <ion-icon name="trash" (click)="deleteItem(i)"></ion-icon>
+            </ion-col>
+            <ion-col col-6 text-center (click)="addToReminders()">
+              <ion-icon name="alarm"></ion-icon>
+              Set a reminder
+            </ion-col>
+            <ion-col col-3 text-center (click)="shareFavourite(favourite)">
+              <ion-icon name="share"></ion-icon>
+            </ion-col>
+          </ion-row>
         </ion-card-content>
       </ion-card>
     </ion-item>

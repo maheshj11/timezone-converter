@@ -12,6 +12,8 @@ import {
 import { ReminderModalPage } from './../reminder-modal/reminder-modal';
 import * as momenttz from 'moment-timezone';
 import * as moment from 'moment';
+import { AndroidFullScreen } from '@ionic-native/android-full-screen';
+import { Brightness } from '@ionic-native/brightness';
 
 
 @IonicPage()
@@ -33,15 +35,14 @@ export class CompareTimePage {
   interval: any;
   divHeight: number;
   showTimeLine: boolean;
-  listEmpty: boolean
+  listEmpty: boolean;
+  isFullScreen: boolean;
   @ViewChild('scroll') scroll: any;
 
-  constructor(public navCtrl: NavController,
-    public navParams: NavParams,
-    private modalCtrl: ModalController,
-    private toastCtrl: ToastController,
-    private alertCtrl: AlertController,
-    private actionCtrl: ActionSheetController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    private modalCtrl: ModalController, private toastCtrl: ToastController,
+    private alertCtrl: AlertController, private brightness: Brightness,
+    private actionCtrl: ActionSheetController, private androidFullScreen: AndroidFullScreen) {
     this.displayTime();
     this.getHeight();
   }
@@ -50,6 +51,27 @@ export class CompareTimePage {
     setTimeout(() => {
       this.scroll._scrollContent.nativeElement.scrollLeft = this.currentTime - (this.scroll._scrollContent.nativeElement.offsetWidth / 2);
     }, 1000);
+  }
+
+  showFullScreen() {
+    if(this.isFullScreen){
+      this.androidFullScreen.showSystemUI();
+      this.brightness.setKeepScreenOn(false);
+      this.isFullScreen = false;
+      return;
+    }
+    this.androidFullScreen.isImmersiveModeSupported()
+      .then(() => {
+        this.androidFullScreen.immersiveMode();
+        this.brightness.setKeepScreenOn(true);
+        this.isFullScreen = true;
+      })
+      .catch((error: any) => console.log(error));
+  }
+
+  ionViewWillLeave(){
+   this.androidFullScreen.showSystemUI();
+   this.brightness.setKeepScreenOn(false);
   }
 
   displayTime() {
